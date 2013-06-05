@@ -22,14 +22,32 @@ if(typeof canvas === 'string'){
 
 var ctx = canvas.getContext('2d');
 
-// Initial source pixels
-var sourceData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+function copyArray(from, to){
+  for(var i = 0; i < from.length; i++){
+    to[i] = from[i];
+  }
+}
+
+// Initial source setup
+var sourceData, savedSourceDataArray;
+function updateSource () {
+  sourceData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+  savedSourceDataArray = new Uint8ClampedArray(sourceData.data.length);
+  copyArray(sourceData.data, savedSourceDataArray);
+}
+updateSource();
 
 return {
 
   // Re-read source pixels from the canvas element
   updateSource: function () {
-    sourceData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    updateSource();
+    return this;
+  },
+
+  // Revert to the pixel data filtr was initialized with
+  revertSource: function () {
+    copyArray(savedSourceDataArray, sourceData.data);
     return this;
   },
 
@@ -66,23 +84,21 @@ return {
   },
 
   contrast: function (amount) {
+    //amount = Number(amount); // strings are toxic here
     amount = Math.pow((amount + 100) / 100, 2);
     var r, g, b;
     for(var i = 0; i < sourceData.data.length; i += 4){
       r = sourceData.data[i], g = sourceData.data[i + 1], b = sourceData.data[i + 2];
-      // Red channel
       r /= 255;
       r -= 0.5;
       r *= amount;
       r += 0.5;
       r *= 255;
-      // Green channel
       g /= 255;
       g -= 0.5;
       g *= amount;
       g += 0.5;
       g *= 255;
-      // Blue channel
       b /= 255;
       b -= 0.5;
       b *= amount;
