@@ -12,8 +12,9 @@ API reference
 -------------
 
 * `filtr(canvasElement)`
-* `filtr.saturation(amount)`
 * `filtr.brightness(amount)`
+* `filtr.contrast(amount)`
+* `filtr.saturation(amount)`
 * `filtr.sepia(amount)`
 * `filtr.updateSource()`
 * `filtr.render()`

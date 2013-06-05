@@ -126,6 +126,51 @@
 		<td></td>
 	</tr>
 	<tr>
+		<td colspan="3"><h1>Contrast filter</h1></td>
+	</tr>
+	<tr>
+		<td>contrast(10)</td>
+		<td><canvas class="contrast-10"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(50)</td>
+		<td><canvas class="contrast-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(90)</td>
+		<td><canvas class="contrast-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(100)</td>
+		<td><canvas class="contrast-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(-10)</td>
+		<td><canvas class="decontrast-10"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(-50)</td>
+		<td><canvas class="decontrast-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(-90)</td>
+		<td><canvas class="decontrast-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>contrast(-100)</td>
+		<td><canvas class="decontrast-100"></canvas></td>
+		<td></td>
+	</tr>
+
+
+	<tr>
 		<td colspan="3"><h1>Combinations</h1></td>
 	</tr>
 	<tr>
@@ -194,6 +239,15 @@ try {
   filtr(setup('canvas.sepia-50')).sepia(50).render();
   filtr(setup('canvas.sepia-90')).sepia(90).render();
   filtr(setup('canvas.sepia-100')).sepia(100).render();
+
+  filtr(setup('canvas.contrast-10')).contrast(10).render();
+  filtr(setup('canvas.contrast-50')).contrast(50).render();
+  filtr(setup('canvas.contrast-90')).contrast(90).render();
+  filtr(setup('canvas.contrast-100')).contrast(100).render();
+  filtr(setup('canvas.decontrast-10')).contrast(-10).render();
+  filtr(setup('canvas.decontrast-50')).contrast(-50).render();
+  filtr(setup('canvas.decontrast-90')).contrast(-90).render();
+  filtr(setup('canvas.decontrast-100')).contrast(-100).render();
 
   filtr(setup('canvas.saturation-50-sepia-50')).saturation(50).sepia(50).render();
   filtr(setup('canvas.brightness-15-sepia-50')).brightness(15).sepia(50).render();

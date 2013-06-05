@@ -65,6 +65,36 @@ return {
     return this;
   },
 
+  contrast: function (amount) {
+    amount = Math.pow((amount + 100) / 100, 2);
+    var r, g, b;
+    for(var i = 0; i < sourceData.data.length; i += 4){
+      r = sourceData.data[i], g = sourceData.data[i + 1], b = sourceData.data[i + 2];
+      // Red channel
+      r /= 255;
+      r -= 0.5;
+      r *= amount;
+      r += 0.5;
+      r *= 255;
+      // Green channel
+      g /= 255;
+      g -= 0.5;
+      g *= amount;
+      g += 0.5;
+      g *= 255;
+      // Blue channel
+      b /= 255;
+      b -= 0.5;
+      b *= amount;
+      b += 0.5;
+      b *= 255;
+      sourceData.data[i] = r;
+      sourceData.data[i + 1] = g;
+      sourceData.data[i + 2] = b;
+    }
+    return this;
+  },
+
   sepia: function (amount) {
     if (typeof amount === 'undefined') {
       amount = 100;
