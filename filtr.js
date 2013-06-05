@@ -84,7 +84,7 @@ return {
   },
 
   contrast: function (amount) {
-    //amount = Number(amount); // strings are toxic here
+    amount = Number(amount); // strings are toxic here
     amount = Math.pow((amount + 100) / 100, 2);
     var r, g, b;
     for(var i = 0; i < sourceData.data.length; i += 4){
