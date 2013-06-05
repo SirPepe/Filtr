@@ -1,0 +1,209 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8">
+<style>
+	canvas {
+		border: 1px solid black;
+		display: block;
+		margin: 0.25em;
+	}
+	table {
+		margin-bottom: 100%;
+	}
+	td {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+</style>
+
+<table cellspacing="0" cellpadding="0">
+	<tr>
+		<td colspan="3"><h1>Basics</h1></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td style="position:relative"><canvas style="position:fixed" class="original"></canvas></td>
+	</tr>
+	<tr>
+		<td>render()</td>
+		<td><canvas class="original-render"></canvas></td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>updateSource().render()</td>
+		<td><canvas class="original-update-render"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3"><h1>Saturation filter</h1></td>
+	</tr>
+	<tr>
+		<td>saturation(50)</td>
+		<td><canvas class="saturation-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>saturation(100)</td>
+		<td><canvas class="saturation-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>saturation(-50)</td>
+		<td><canvas class="desaturation-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>saturation(-100)</td>
+		<td><canvas class="desaturation-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3"><h1>Brightness filter</h1></td>
+	</tr>
+	<tr>
+		<td>brightness(10)</td>
+		<td><canvas class="brightness-10"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(50)</td>
+		<td><canvas class="brightness-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(90)</td>
+		<td><canvas class="brightness-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(100)</td>
+		<td><canvas class="brightness-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(-10)</td>
+		<td><canvas class="debrightness-10"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(-50)</td>
+		<td><canvas class="debrightness-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(-90)</td>
+		<td><canvas class="debrightness-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(-100)</td>
+		<td><canvas class="debrightness-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3"><h1>Sepia filter</h1></td>
+	</tr>
+	<tr>
+		<td>sepia(10)</td>
+		<td><canvas class="sepia-10"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sepia(50)</td>
+		<td><canvas class="sepia-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sepia(90)</td>
+		<td><canvas class="sepia-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sepia(100)</td>
+		<td><canvas class="sepia-100"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3"><h1>Combinations</h1></td>
+	</tr>
+	<tr>
+		<td>saturation(50).sepia(50)</td>
+		<td><canvas class="saturation-50-sepia-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>brightness(15).sepia(50)</td>
+		<td><canvas class="brightness-15-sepia-50"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sepia(50).saturation(80)</td>
+		<td><canvas class="sepia-50-saturation-90"></canvas></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sepia(50).saturation(80).brightness(20)</td>
+		<td><canvas class="sepia-50-saturation-90-brightness-20"></canvas></td>
+		<td></td>
+	</tr>
+</table>
+
+
+<script src="filtr.js"></script>
+
+<script>
+
+var testImg = new Image();
+testImg.src = 'test.png';
+
+var setup = function(selector){
+  var ctx = document.querySelector(selector).getContext('2d');
+  ctx.canvas.width = testImg.naturalWidth;
+  ctx.canvas.height = testImg.naturalHeight;
+  ctx.drawImage(testImg, 0, 0);
+  return ctx.canvas;
+}
+
+testImg.onload = function(){
+
+
+// Visual filter / smoke test
+try {
+
+  filtr(setup('canvas.original'));
+  filtr(setup('canvas.original-render')).render();
+  filtr(setup('canvas.original-update-render')).render();
+
+  filtr(setup('canvas.saturation-50')).saturation(50).render();
+  filtr(setup('canvas.saturation-100')).saturation(100).render();
+  filtr(setup('canvas.desaturation-50')).saturation(-50).render();
+  filtr(setup('canvas.desaturation-100')).saturation(-100).render();
+
+  filtr(setup('canvas.brightness-10')).brightness(10).render();
+  filtr(setup('canvas.brightness-50')).brightness(50).render();
+  filtr(setup('canvas.brightness-90')).brightness(90).render();
+  filtr(setup('canvas.brightness-100')).brightness(100).render();
+  filtr(setup('canvas.debrightness-10')).brightness(-10).render();
+  filtr(setup('canvas.debrightness-50')).brightness(-50).render();
+  filtr(setup('canvas.debrightness-90')).brightness(-90).render();
+  filtr(setup('canvas.debrightness-100')).brightness(-100).render();
+
+  filtr(setup('canvas.sepia-10')).sepia(10).render();
+  filtr(setup('canvas.sepia-50')).sepia(50).render();
+  filtr(setup('canvas.sepia-90')).sepia(90).render();
+  filtr(setup('canvas.sepia-100')).sepia(100).render();
+
+  filtr(setup('canvas.saturation-50-sepia-50')).saturation(50).sepia(50).render();
+  filtr(setup('canvas.brightness-15-sepia-50')).brightness(15).sepia(50).render();
+  filtr(setup('canvas.sepia-50-saturation-90')).sepia(50).saturation(80).render();
+  filtr(setup('canvas.sepia-50-saturation-90-brightness-20')).sepia(50).saturation(80).brightness(20).render();
+
+} catch (e) {
+  alert('Something broke!');
+  console.dir(e);
+}
+
+};
+</script>
