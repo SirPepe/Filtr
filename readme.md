@@ -11,10 +11,11 @@ How to use
 API reference
 -------------
 
-* `filtr(canvasElement)`
-* `filtr.brightness(amount)`
-* `filtr.contrast(amount)`
-* `filtr.saturation(amount)`
-* `filtr.sepia(amount)`
-* `filtr.updateSource()`
-* `filtr.render()`
+* `filtr(canvasElement)` - Initialize
+* `filtr.updateSource()` - Overwrite cached image data with what's currently on the canvas
+* `filtr.revertSource()` - Revert to cached image data
+* `filtr.brightness(amount)` - Brightness filter
+* `filtr.contrast(amount)` - Contrast filter
+* `filtr.saturation(amount)` - Saturation filter
+* `filtr.sepia(amount)` - Sepia effect
+* `filtr.render()` - Render the result of the current operation
